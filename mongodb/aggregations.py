@@ -58,3 +58,5 @@ from bson.son import SON
 pprint.pprint(db.things.map_reduce(
     mapper, reducer, out=SON([("replace","results"),("db","outdb")]),
     full_response=True))
+
+
