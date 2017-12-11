@@ -1,6 +1,5 @@
 from pymongo import MongoClient
-client = MongoClient('localhost', 27017, username='testadmin', 
-                password='password')
+client = MongoClient('localhost', 27017, username='testadmin', password='password')
 
 db = client.aggregation_example
 
