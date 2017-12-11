@@ -8,7 +8,7 @@ result = db.things.insert_many([{"x": 1, "tags": ["dog", "cat"]},
                             {"x": 2, "tags": ["cat"]},
                             {"x": 2, "tags": ["mouse", "dog", "cat"]},
                             {"x": 3, "tags": []}])
-result.inerted_ids
+print result.inserted_ids
 
 from bson.son import SON
 pipeline = [{"$unwind": "$tags"},
@@ -42,9 +42,19 @@ reducer = Code("""
                 """)
 
 
+print "trying to apply map reduce: "
 result = db.things.map_reduce(mapper, reducer, "myresults")
 for doc in result.find():
     pprint.pprint(doc)
 
 pprint.pprint(db.things.map_reduce(mapper, reducer, "myresults", full_response=True))
 
+
+results = db.things.map_reduce(mapper, reducer, "myresults", query={"x":{"$lt":2}})
+for doc in results.find():
+    pprint.pprint(doc)
+
+from bson.son import SON
+pprint.pprint(db.things.map_reduce(
+    mapper, reducer, out=SON([("replace","results"),("db","outdb")]),
+    full_response=True))
