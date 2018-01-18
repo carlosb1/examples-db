@@ -1,8 +1,12 @@
 TODO
 ====
  [X] -> MongoDB
- [ ] -> Riak
+ 
+ [ ] -> Riak 
+  
  [ ] -> Neo4j
+ 
  [ ] -> HBase
+ 
  [ ] -> CouchDB
 
